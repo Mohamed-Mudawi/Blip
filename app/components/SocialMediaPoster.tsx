@@ -459,7 +459,7 @@ export default function SocialMediaPoster() {
 
                     {/* Platform Selection */}
                     <div className="mb-6">
-                        <label className="block text-sm font-medium text-gray-700 mb-3">
+                        <label className="block text-sm font-medium text-white mb-3">
                             Select Platforms
                         </label>
                         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
@@ -492,17 +492,17 @@ export default function SocialMediaPoster() {
 
                     {/* Post Content */}
                     <div className="mb-6">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-white mb-2">
                             Post Content
                         </label>
                         <textarea
                             value={postContent}
                             onChange={handleContentChange}
                             placeholder="What's on your mind?"
-                            className="w-full h-32 p-4 border border-white/10 rounded-xl bg-transparent placeholder-blue-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full h-32 p-4 border border-white/20 rounded-xl bg-white/5 text-white placeholder-blue-300/70 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                         <div className="flex justify-between items-center mt-2">
-                            <span className="text-sm text-blue-200/60">
+                            <span className="text-sm text-blue-300">
                                 {charCount} characters
                             </span>
                             {getCharLimitWarning()}
@@ -511,7 +511,7 @@ export default function SocialMediaPoster() {
 
                     {/* Media Upload */}
                     <div className="mb-6">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-white mb-2">
                             Media
                         </label>
                         <div className="flex gap-2 mb-4">
