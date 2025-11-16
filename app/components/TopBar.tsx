@@ -1,0 +1,18 @@
+"use client";
+
+import type { User } from "@supabase/supabase-js";
+import UserMenu from "./UserMenu";
+
+export default function TopBar({ user }: { user: User | null }) {
+    return (
+        <nav className="w-full h-16 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between px-6 shadow-sm">
+            {/* Left side: App Name */}
+            <h1 className="text-xl font-semibold tracking-tight">
+                Blip Social Hub
+            </h1>
+
+            {/* Right side: User menu */}
+            {user && <UserMenu user={user} />}
+        </nav>
+    );
+}

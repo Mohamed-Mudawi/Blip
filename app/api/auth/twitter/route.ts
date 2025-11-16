@@ -19,7 +19,7 @@ export async function GET() {
     redirect_uri: redirectUri,
     scope: "tweet.read tweet.write users.read offline.access",
     state: "state123",
-    code_challenge: "challenge",
+    code_challenge: process.env.TWITTER_CODE_CHALLENGE || "challenge",
     code_challenge_method: "plain",
   });
 

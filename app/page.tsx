@@ -1,41 +1,22 @@
+// Updated app/page.tsx landing page
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="font-sans bg-zinc-50 dark:bg-black">
-
-      {/* HERO / WELCOME SECTION */}
       <section className="flex flex-col items-center justify-center h-screen text-center px-6 bg-white dark:bg-black">
-
-        {/* Logo */}
-        {/* <div className="flex items-center gap-3 mb-6">
-          <Image
-            src="/blip-logo.png"
-            alt="Blip logo"
-            width={60}
-            height={60}
-            priority
-          />
-          <h1 className="text-4xl font-semibold text-black dark:text-white tracking-tight">
-            Blip
-          </h1>
-        </div> */}
-
-        {/* Headline */}
         <h2 className="max-w-2xl text-5xl font-bold text-black dark:text-white leading-tight">
           The fastest way for schools & clubs to share events.
         </h2>
 
-        {/* Subtext */}
         <p className="max-w-md mt-4 text-lg text-zinc-600 dark:text-zinc-400">
           Create once. Post everywhere. Keep your campus connected.
         </p>
 
-        {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 mt-10">
           <Link
-            href="/home"
+            href="/login"
             className="inline-block rounded-full bg-blue-600 px-8 py-3 text-white font-medium hover:bg-blue-700 transition shadow-lg"
           >
             Get Started →
@@ -49,13 +30,10 @@ export default function Home() {
         </div>
       </section>
 
-
-      {/* FULL ABOUT SECTION */}
       <section
         id="learn-more"
         className="max-w-3xl mx-auto px-8 py-24 flex flex-col gap-16 text-left"
       >
-        {/* What is Blip? */}
         <div>
           <h3 className="text-3xl font-semibold text-black dark:text-white">
             What is Blip?
@@ -67,7 +45,6 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Who is it for */}
         <div>
           <h3 className="text-3xl font-semibold text-black dark:text-white">
             Who is it for?
@@ -80,7 +57,6 @@ export default function Home() {
           </ul>
         </div>
 
-        {/* How it works */}
         <div>
           <h3 className="text-3xl font-semibold text-black dark:text-white">
             How does it work?
@@ -93,7 +69,6 @@ export default function Home() {
           </ol>
         </div>
 
-        {/* Why Blip */}
         <div>
           <h3 className="text-3xl font-semibold text-black dark:text-white">
             Why Blip?
@@ -105,7 +80,6 @@ export default function Home() {
           </p>
         </div>
 
-        {/* CTA in About Section */}
         <div className="text-center pt-8">
           <Link
             href="/home"
@@ -116,7 +90,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="py-10 text-center text-sm text-zinc-500 dark:text-zinc-600">
         © {new Date().getFullYear()} Blip — All Rights Reserved
       </footer>
