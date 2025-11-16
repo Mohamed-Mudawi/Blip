@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Camera, ImageIcon, Video, X, Instagram, Twitter, CheckCircle2 } from 'lucide-react';
+import { ImageIcon, Video, X, CheckCircle2 } from 'lucide-react';
 
 interface MediaFile {
   id: string;
@@ -26,6 +26,14 @@ interface SelectedPlatforms {
   linkedin: boolean;
 }
 
+const platforms = [
+  { id: 'instagram', name: 'Instagram', color: 'bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500', limit: 2200 },
+  { id: 'twitter', name: 'Twitter/X', color: 'bg-black', limit: 280 },
+  { id: 'tiktok', name: 'TikTok', color: 'bg-gradient-to-br from-black via-gray-900 to-pink-600', limit: 2200 },
+  { id: 'facebook', name: 'Facebook', color: 'bg-blue-600', limit: 63206 },
+  { id: 'linkedin', name: 'LinkedIn', color: 'bg-blue-700', limit: 3000 },
+] as const;
+
 export default function SocialMediaPoster() {
   const [postContent, setPostContent] = useState('');
   const [selectedPlatforms, setSelectedPlatforms] = useState<SelectedPlatforms>({
@@ -33,25 +41,17 @@ export default function SocialMediaPoster() {
     twitter: false,
     tiktok: false,
     facebook: false,
-    linkedin: false
+    linkedin: false,
   });
   const [mediaFiles, setMediaFiles] = useState<MediaFile[]>([]);
   const [charCount, setCharCount] = useState(0);
   const [posts, setPosts] = useState<Post[]>([]);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const platforms = [
-    { id: 'instagram', name: 'Instagram', color: 'bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500', limit: 2200 },
-    { id: 'twitter', name: 'Twitter/X', color: 'bg-black', limit: 280 },
-    { id: 'tiktok', name: 'TikTok', color: 'bg-gradient-to-br from-black via-gray-900 to-pink-600', limit: 2200 },
-    { id: 'facebook', name: 'Facebook', color: 'bg-blue-600', limit: 63206 },
-    { id: 'linkedin', name: 'LinkedIn', color: 'bg-blue-700', limit: 3000 }
-  ];
-
   const handlePlatformToggle = (platformId: string) => {
     setSelectedPlatforms(prev => ({
       ...prev,
-      [platformId]: !prev[platformId as keyof typeof prev]
+      [platformId]: !prev[platformId as keyof SelectedPlatforms],
     }));
   };
 
@@ -67,7 +67,7 @@ export default function SocialMediaPoster() {
       id: Math.random().toString(36).substr(2, 9),
       name: file.name,
       type: file.type,
-      url: URL.createObjectURL(file)
+      url: URL.createObjectURL(file),
     }));
     setMediaFiles(prev => [...prev, ...newMedia]);
   };
@@ -96,11 +96,11 @@ export default function SocialMediaPoster() {
       content: postContent,
       platforms: selectedPlatformsList,
       media: mediaFiles.length,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
 
     setPosts(prev => [newPost, ...prev]);
-    
+
     // Reset form
     setPostContent('');
     setCharCount(0);
@@ -110,7 +110,7 @@ export default function SocialMediaPoster() {
       twitter: false,
       tiktok: false,
       facebook: false,
-      linkedin: false
+      linkedin: false,
     });
 
     // Show success message
@@ -119,12 +119,17 @@ export default function SocialMediaPoster() {
   };
 
   const getCharLimitWarning = () => {
-    const selected = Object.keys(selectedPlatforms).filter(key => selectedPlatforms[key as keyof SelectedPlatforms]);
+    const selected = Object.keys(selectedPlatforms).filter(
+      key => selectedPlatforms[key as keyof SelectedPlatforms]
+    );
     if (selected.length === 0) return null;
-    
+
     const limits = selected.map(id => {
       const platform = platforms.find(p => p.id === id);
-      return { name: platform?.name || '', limit: platform?.limit || 0 };
+      return {
+        name: platform?.name || '',
+        limit: platform?.limit || 0,
+      };
     });
 
     const minLimit = Math.min(...limits.map(l => l.limit));
@@ -157,7 +162,7 @@ export default function SocialMediaPoster() {
 
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4 text-gray-800">Create Post</h2>
-          
+
           {/* Platform Selection */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-700 mb-3">
@@ -167,6 +172,7 @@ export default function SocialMediaPoster() {
               {platforms.map(platform => (
                 <button
                   key={platform.id}
+                  type="button"
                   onClick={() => handlePlatformToggle(platform.id)}
                   className={`relative p-4 rounded-xl transition-all ${
                     selectedPlatforms[platform.id as keyof SelectedPlatforms]
@@ -219,6 +225,7 @@ export default function SocialMediaPoster() {
                   className="hidden"
                 />
               </label>
+
               <label className="cursor-pointer bg-purple-50 hover:bg-purple-100 text-purple-600 px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
                 <Video size={20} />
                 <span className="text-sm font-medium">Add Video</span>
@@ -239,7 +246,11 @@ export default function SocialMediaPoster() {
                   <div key={file.id} className="relative group">
                     <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
                       {file.type.startsWith('image/') ? (
-                        <img src={file.url} alt={file.name} className="w-full h-full object-cover" />
+                        <img
+                          src={file.url}
+                          alt={file.name}
+                          className="w-full h-full object-cover"
+                        />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
                           <Video size={40} className="text-gray-400" />
@@ -247,6 +258,7 @@ export default function SocialMediaPoster() {
                       )}
                     </div>
                     <button
+                      type="button"
                       onClick={() => removeMedia(file.id)}
                       className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                     >
@@ -260,6 +272,7 @@ export default function SocialMediaPoster() {
 
           {/* Post Button */}
           <button
+            type="button"
             onClick={handlePost}
             className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 rounded-xl transition-all shadow-lg hover:shadow-xl"
           >
@@ -273,8 +286,13 @@ export default function SocialMediaPoster() {
             <h2 className="text-xl font-semibold mb-4 text-gray-800">Recent Posts</h2>
             <div className="space-y-4">
               {posts.map(post => (
-                <div key={post.id} className="border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow">
-                  <p className="text-gray-800 mb-3">{post.content}</p>
+                <div
+                  key={post.id}
+                  className="border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow"
+                >
+                  <p className="text-gray-800 mb-3 whitespace-pre-wrap">
+                    {post.content}
+                  </p>
                   <div className="flex flex-wrap gap-2 mb-2">
                     {post.platforms.map(platformId => {
                       const platform = platforms.find(p => p.id === platformId);
@@ -290,7 +308,9 @@ export default function SocialMediaPoster() {
                   </div>
                   <div className="flex items-center gap-4 text-xs text-gray-500">
                     <span>{new Date(post.timestamp).toLocaleString()}</span>
-                    {post.media > 0 && <span>{post.media} media file(s)</span>}
+                    {post.media > 0 && (
+                      <span>{post.media} media file(s)</span>
+                    )}
                   </div>
                 </div>
               ))}

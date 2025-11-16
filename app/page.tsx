@@ -9,7 +9,7 @@ export default function Home() {
       <section className="flex flex-col items-center justify-center h-screen text-center px-6 bg-white dark:bg-black">
 
         {/* Logo */}
-        <div className="flex items-center gap-3 mb-6">
+        {/* <div className="flex items-center gap-3 mb-6">
           <Image
             src="/blip-logo.png"
             alt="Blip logo"
@@ -20,7 +20,7 @@ export default function Home() {
           <h1 className="text-4xl font-semibold text-black dark:text-white tracking-tight">
             Blip
           </h1>
-        </div>
+        </div> */}
 
         {/* Headline */}
         <h2 className="max-w-2xl text-5xl font-bold text-black dark:text-white leading-tight">
