@@ -1,12 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="font-sans bg-zinc-50 dark:bg-black">
-      
+
       {/* HERO / WELCOME SECTION */}
       <section className="flex flex-col items-center justify-center h-screen text-center px-6 bg-white dark:bg-black">
-        
+
         {/* Logo */}
         <div className="flex items-center gap-3 mb-6">
           <Image
@@ -31,13 +32,21 @@ export default function Home() {
           Create once. Post everywhere. Keep your campus connected.
         </p>
 
-        {/* Scroll Button */}
-        <a
-          href="#learn-more"
-          className="mt-10 inline-block rounded-full bg-black px-8 py-3 text-white font-medium hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200 transition"
-        >
-          Learn More ↓
-        </a>
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 mt-10">
+          <Link
+            href="/home"
+            className="inline-block rounded-full bg-blue-600 px-8 py-3 text-white font-medium hover:bg-blue-700 transition shadow-lg"
+          >
+            Get Started →
+          </Link>
+          <a
+            href="#learn-more"
+            className="inline-block rounded-full bg-black px-8 py-3 text-white font-medium hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200 transition"
+          >
+            Learn More ↓
+          </a>
+        </div>
       </section>
 
 
@@ -52,7 +61,7 @@ export default function Home() {
             What is Blip?
           </h3>
           <p className="mt-3 text-zinc-600 dark:text-zinc-400 leading-7 text-lg">
-            Blip is a simple platform that helps schools and clubs make announcements 
+            Blip is a simple platform that helps schools and clubs make announcements
             effortlessly. Enter event details, generate a poster, pick where to share it—
             and Blip handles the posting for you.
           </p>
@@ -94,6 +103,16 @@ export default function Home() {
             hours of repetitive posting work. It's clean, fast, and built for modern
             school communities.
           </p>
+        </div>
+
+        {/* CTA in About Section */}
+        <div className="text-center pt-8">
+          <Link
+            href="/home"
+            className="inline-block rounded-full bg-blue-600 px-10 py-4 text-white font-semibold hover:bg-blue-700 transition shadow-lg text-lg"
+          >
+            Try Blip Now →
+          </Link>
         </div>
       </section>
 
